@@ -1,22 +1,18 @@
 import React, { useState } from 'react'
 import './App.css'
-import { GraphQLClient } from 'graphql-request'
 
-import Table from './components/Table'
-import CreateModel from './components/CreateModal'
-import { EditModal } from './components/EditModal'
-
-const endpoint = 'https://test-task.expane.pro/api/graphql'
-export const expaneClient = new GraphQLClient(endpoint, { headers: {} })
+import Table from '../components/table/Table'
+import AddModel from '../components/addModal'
+import EditModal from '../components/editModal'
 
 function App() {
-    const [firstName, setFirstName] = useState('')
-    const [lastName, setLastName] = useState('')
-    const [phone, setPhone] = useState('')
-    const [avatarUrl, setAvatarUrl] = useState('')
-    const [id, setId] = useState('')
-    const [openEditModal, setOpenEditModal] = useState(false)
-    const [openCreateModal, setOpenCreateModal] = useState(false)
+    const [firstName, setFirstName] = useState<string>('')
+    const [lastName, setLastName] = useState<string>('')
+    const [phone, setPhone] = useState<string>('')
+    const [avatarUrl, setAvatarUrl] = useState<string>('')
+    const [id, setId] = useState<string>('')
+    const [openEditModal, setOpenEditModal] = useState<boolean>(false)
+    const [openCreateModal, setOpenCreateModal] = useState<boolean>(false)
 
     return (
         <div className="App">
@@ -32,7 +28,7 @@ function App() {
                 >
                     CreateClient
                 </button>
-                <CreateModel
+                <AddModel
                     setOpenCreateModal={setOpenCreateModal}
                     setFirstName={setFirstName}
                     setLastName={setLastName}
@@ -54,12 +50,12 @@ function App() {
                 />
                 <EditModal
                     setOpenEditModal={setOpenEditModal}
+                    openEditModal={openEditModal}
                     setFirstName={setFirstName}
                     setLastName={setLastName}
                     setPhone={setPhone}
                     setAvatarUrl={setAvatarUrl}
                     setId={setId}
-                    openEditModal={openEditModal}
                     firstName={firstName}
                     lastName={lastName}
                     phone={phone}

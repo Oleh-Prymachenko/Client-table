@@ -1,84 +1,23 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
-import { useQueryClient, useMutation } from 'react-query'
-import { gql } from 'graphql-request'
 
-import { expaneClient } from '../App'
-
-export const EditModal = ({
-    setOpenEditModal,
+export default function Model({
     setFirstName,
     setLastName,
     setPhone,
     setAvatarUrl,
-    setId,
-    openEditModal,
     firstName,
     lastName,
     phone,
     avatarUrl,
-    id,
-}) => {
+    openEditModal,
+    handleUpdateClient,
+}): JSX.Element {
     const { register, handleSubmit, errors } = useForm()
 
-    const queryClient = useQueryClient()
     const showHideModal = openEditModal
         ? 'edit-modal display-block'
         : 'edit-modal display-none'
-
-    const idVarible = {
-        id,
-        firstName,
-        lastName,
-        phone,
-        avatarUrl,
-    }
-
-    const updateClients = async () => {
-        const response = await expaneClient.request(
-            gql`
-                mutation updateClient(
-                    $id: ID!
-                    $firstName: String!
-                    $lastName: String!
-                    $phone: String
-                    $avatarUrl: String
-                ) {
-                    updateClient(
-                        id: $id
-                        firstName: $firstName
-                        lastName: $lastName
-                        phone: $phone
-                        avatarUrl: $avatarUrl
-                    ) {
-                        id
-                        firstName
-                        lastName
-                        phone
-                        avatarUrl
-                    }
-                }
-            `,
-            idVarible
-        )
-        console.log(JSON.stringify(response, undefined, 2))
-    }
-
-    const updateClientMutuation = useMutation(updateClients, {
-        onSuccess: () => queryClient.invalidateQueries('clients'),
-    })
-
-    const handleUpdateClient = (data) => {
-        setOpenEditModal(false)
-        updateClientMutuation.mutate(data, {
-            onSuccess: () => {
-                setId('')
-                setFirstName('')
-                setLastName('')
-                setPhone('')
-            },
-        })
-    }
 
     const required = 'This field is required'
     const maxLength = 'Your input exceed maximum length'
@@ -104,7 +43,9 @@ export const EditModal = ({
                                     maxLength: 18,
                                     minLength: 2,
                                 })}
-                                onChange={(e) => setFirstName(e.target.value)}
+                                onChange={(
+                                    e: React.FormEvent<HTMLInputElement>
+                                ) => setFirstName(e.currentTarget.value)}
                             />
                             {errors.firstname &&
                                 errors.firstname.type === 'required' &&
@@ -125,7 +66,9 @@ export const EditModal = ({
                                     maxLength: 18,
                                     minLength: 2,
                                 })}
-                                onChange={(e) => setLastName(e.target.value)}
+                                onChange={(
+                                    e: React.FormEvent<HTMLInputElement>
+                                ) => setLastName(e.currentTarget.value)}
                             />
                             {errors.lastname &&
                                 errors.lastname.type === 'required' &&
@@ -146,7 +89,9 @@ export const EditModal = ({
                                     maxLength: 15,
                                     minLength: 8,
                                 })}
-                                onChange={(e) => setPhone(e.target.value)}
+                                onChange={(
+                                    e: React.FormEvent<HTMLInputElement>
+                                ) => setPhone(e.currentTarget.value)}
                             />
                             {errors.phone &&
                                 errors.phone.type === 'required' &&
