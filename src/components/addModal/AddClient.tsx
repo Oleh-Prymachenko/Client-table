@@ -4,69 +4,69 @@ import { useQueryClient, useMutation } from 'react-query'
 import Form from './Form'
 import { expaneClient } from '../../api/graphqlClients'
 import { createClient } from '../../api/mutations'
-import { IForAdd } from '../../types/interfaces'
+import { IForCreate } from '../../types/interfaces'
 
-interface IForm {
-    setOpenCreateModal: any
-    openCreateModal: any
-    setFirstName: any
-    setLastName: any
-    setPhone: any
-    setAvatarUrl: any
-    firstName: string
-    lastName: string
-    phone: string
-    avatarUrl: string
-    id: string
-}
-
-export const AddClient = ({
+export default ({
     setOpenCreateModal,
     setFirstName,
     setLastName,
     setPhone,
-    setAvatarUrl,
     openCreateModal,
     firstName,
     lastName,
     phone,
-    avatarUrl,
     id,
-}: IForm): JSX.Element => {
+}): JSX.Element => {
     const queryClient = useQueryClient()
 
-    const variablesForAdd: IForAdd = {
+    const variablesForCreate: IForCreate = {
         id,
         firstName,
         lastName,
         phone,
-        avatarUrl,
     }
 
-    const addClients = async () => {
+    const CreateClient = async () => {
         const response = await expaneClient.request(
             createClient,
-            variablesForAdd
+            variablesForCreate
         )
         console.log(JSON.stringify(response, undefined, 2))
         return response
     }
 
-    const addClientMutuation = useMutation(addClients, {
+    const addClient: any = useMutation(CreateClient, {
         onSuccess: () => queryClient.invalidateQueries('clients'),
     })
 
     const handleNewClient = (data: any): void => {
-        addClientMutuation.mutate(data, {
+        addClient.mutate(data, {
             onSuccess: () => {
                 setFirstName('')
                 setLastName('')
                 setPhone('')
-                setAvatarUrl('')
                 console.log(data)
                 setOpenCreateModal(false)
             },
         })
+    }
+
+    if (addClient.isLoading) {
+        return <div className="response-status">Adding client...</div>
+    }
+
+    if (addClient.isError) {
+        return (
+            <div className="response-status">
+                An error occurred {addClient.error.message}
+            </div>
+        )
+    }
+
+    if (addClient.isSuccess) {
+        setTimeout(() => {
+            return <div className="response-status">Client added!</div>
+        }, 0)
     }
 
     return (
@@ -75,12 +75,11 @@ export const AddClient = ({
             setFirstName={setFirstName}
             setLastName={setLastName}
             setPhone={setPhone}
-            setAvatarUrl={setAvatarUrl}
             openCreateModal={openCreateModal}
+            setOpenCreateModal={setOpenCreateModal}
             firstName={firstName}
             lastName={lastName}
             phone={phone}
-            avatarUrl={avatarUrl}
         />
     )
 }

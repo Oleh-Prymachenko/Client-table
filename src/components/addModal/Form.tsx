@@ -6,12 +6,11 @@ export default function Form({
     setFirstName,
     setLastName,
     setPhone,
-    setAvatarUrl,
     openCreateModal,
+    setOpenCreateModal,
     firstName,
     lastName,
     phone,
-    avatarUrl,
 }): JSX.Element {
     const { register, handleSubmit, errors } = useForm()
 
@@ -28,6 +27,13 @@ export default function Form({
 
     return (
         <div className={showHideModal}>
+            <button
+                type="button"
+                className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded float-right"
+                onClick={() => setOpenCreateModal(false)}
+            >
+                Close
+            </button>
             <div className="modal-fixed">
                 {openCreateModal && (
                     <form onSubmit={handleSubmit(handleNewClient)}>

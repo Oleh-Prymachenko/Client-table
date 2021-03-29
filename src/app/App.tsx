@@ -9,7 +9,6 @@ function App() {
     const [firstName, setFirstName] = useState<string>('')
     const [lastName, setLastName] = useState<string>('')
     const [phone, setPhone] = useState<string>('')
-    const [avatarUrl, setAvatarUrl] = useState<string>('')
     const [id, setId] = useState<string>('')
     const [openEditModal, setOpenEditModal] = useState<boolean>(false)
     const [openCreateModal, setOpenCreateModal] = useState<boolean>(false)
@@ -26,25 +25,26 @@ function App() {
                     }
                     className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                 >
-                    CreateClient
+                    Create client
                 </button>
                 <AddModel
                     setOpenCreateModal={setOpenCreateModal}
                     setFirstName={setFirstName}
                     setLastName={setLastName}
                     setPhone={setPhone}
-                    setAvatarUrl={setAvatarUrl}
                     openCreateModal={openCreateModal}
                     firstName={firstName}
                     lastName={lastName}
                     phone={phone}
-                    avatarUrl={avatarUrl}
                     id={id}
                 />
             </div>
             <div className="flex justify-center mt-8">
                 <Table
                     setId={setId}
+                    setFirstName={setFirstName}
+                    setLastName={setLastName}
+                    setPhone={setPhone}
                     setOpenEditModal={setOpenEditModal}
                     setOpenCreateModal={setOpenCreateModal}
                 />
@@ -54,12 +54,10 @@ function App() {
                     setFirstName={setFirstName}
                     setLastName={setLastName}
                     setPhone={setPhone}
-                    setAvatarUrl={setAvatarUrl}
                     setId={setId}
                     firstName={firstName}
                     lastName={lastName}
                     phone={phone}
-                    avatarUrl={avatarUrl}
                     id={id}
                 />
             </div>
@@ -68,3 +66,9 @@ function App() {
 }
 
 export default App
+
+// - “Your input exceed minimum length” - it’s not clear for the user what is minimum length from this message [UX]
+// - When pressing on “Edit” button, popup without any data in form is opened and it’s not possible to close it in any way [LOGIC]
+// - TypeScript was not used for the most of application [CODE]
+// - Naming can be improved for better code readability, watch the typos - `updateClientMutuation`, `idVarible`, etc. [CODE]
+// - It would be good to extract fetch data functions into separate `api.ts` file to decouple view from business logic [CODE]

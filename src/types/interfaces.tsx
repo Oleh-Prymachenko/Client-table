@@ -1,9 +1,8 @@
-export interface IForAdd {
+export interface IForCreate {
     id: string
     firstName: string
     lastName: string
     phone: string
-    avatarUrl: string
 }
 
 export interface IForUpdate {
@@ -11,5 +10,29 @@ export interface IForUpdate {
     firstName: string
     lastName: string
     phone: string
-    avatarUrl: string
+}
+
+export interface IForm {
+    setFirstName: string
+    setLastName: string
+    setPhone: string
+    firstName: string
+    lastName: string
+    phone: string
+    id: string
+    openEditModal: boolean
+    setOpenEditModal: boolean
+    setId: string
+}
+
+export interface I {
+    setOpenCreateModal: any
+    openCreateModal: any
+    setFirstName: any
+    setLastName: any
+    setPhone: any
+    firstName: string
+    lastName: string
+    phone: string
+    id: string
 }

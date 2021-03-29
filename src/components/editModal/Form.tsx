@@ -5,12 +5,13 @@ export default function Model({
     setFirstName,
     setLastName,
     setPhone,
-    setAvatarUrl,
     firstName,
     lastName,
     phone,
-    avatarUrl,
+    id,
+    setId,
     openEditModal,
+    setOpenEditModal,
     handleUpdateClient,
 }): JSX.Element {
     const { register, handleSubmit, errors } = useForm()
@@ -31,9 +32,17 @@ export default function Model({
         <>
             {openEditModal && (
                 <div className={showHideModal}>
+                    <button
+                        type="button"
+                        className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded float-right"
+                        onClick={() => setOpenEditModal(false)}
+                    >
+                        Close
+                    </button>
                     <div className="modal-fixed">
                         <form onSubmit={handleSubmit(handleUpdateClient)}>
                             <input
+                                id={id}
                                 type="text"
                                 placeholder="firstname"
                                 name="firstname"

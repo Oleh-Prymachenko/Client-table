@@ -6,34 +6,17 @@ import { updateClient } from '../../api/mutations'
 import { IForUpdate } from '../../types/interfaces'
 import Form from './Form'
 
-interface IForm {
-    setFirstName: string
-    setLastName: string
-    setPhone: string
-    setAvatarUrl: string
-    firstName: string
-    lastName: string
-    phone: string
-    avatarUrl: string
-    id: string
-    openEditModal: boolean
-    setOpenEditModal: boolean
-    setId: string
-}
-
-export const EditClient = ({
+export default ({
     setOpenEditModal,
     openEditModal,
     setFirstName,
     setLastName,
     setPhone,
-    setAvatarUrl,
-    setId,
     firstName,
     lastName,
     phone,
-    avatarUrl,
     id,
+    setId,
 }): JSX.Element => {
     const queryClient = useQueryClient()
 
@@ -42,7 +25,6 @@ export const EditClient = ({
         firstName,
         lastName,
         phone,
-        avatarUrl,
     }
 
     const updateClients = async () => {
@@ -53,20 +35,38 @@ export const EditClient = ({
         console.log(JSON.stringify(response, undefined, 2))
     }
 
-    const updateClientMutuation = useMutation(updateClients, {
+    const editClient: any = useMutation(updateClients, {
         onSuccess: () => queryClient.invalidateQueries('clients'),
     })
 
     const handleUpdateClient = (data) => {
         setOpenEditModal(false)
-        updateClientMutuation.mutate(data, {
+        editClient.mutate(data, {
             onSuccess: () => {
-                setId('')
                 setFirstName('')
                 setLastName('')
                 setPhone('')
+                console.log(data)
             },
         })
+    }
+
+    if (editClient.isLoading) {
+        return <div className="response-status">Editing client...</div>
+    }
+
+    if (editClient.isError) {
+        return (
+            <div className="response-status">
+                An error occurred {editClient.error.message}
+            </div>
+        )
+    }
+
+    if (editClient.isSuccess) {
+        setTimeout(() => {
+            return <div className="response-status">Client edit</div>
+        }, 2000)
     }
 
     return (
@@ -75,12 +75,13 @@ export const EditClient = ({
             setFirstName={setFirstName}
             setLastName={setLastName}
             setPhone={setPhone}
-            setAvatarUrl={setAvatarUrl}
             openEditModal={openEditModal}
+            setOpenEditModal={setOpenEditModal}
             firstName={firstName}
             lastName={lastName}
             phone={phone}
-            avatarUrl={avatarUrl}
+            id={id}
+            setId={setId}
         />
     )
 }

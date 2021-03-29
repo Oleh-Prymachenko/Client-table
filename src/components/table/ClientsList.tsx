@@ -29,7 +29,7 @@ export default function ClientsList({
             </thead>
             {data.getClients.map((client) => (
                 <tbody className="bg-white divide-y divide-gray-200">
-                    <tr key={client.id}>
+                    <tr key={client.id} onClick={(e) => OpenEditFormModal(e)}>
                         <td className="px-6 py-4 whitespace-no-wrap text-sm leading-5 font-medium text-gray-900">
                             {client.firstName}
                         </td>
@@ -39,12 +39,10 @@ export default function ClientsList({
                         <td className="px-6 py-4 whitespace-no-wrap text-sm leading-5 font-medium text-gray-900">
                             {client.phone}
                         </td>
-                        {/* <td className="px-6 py-4 whitespace-no-wrap text-sm leading-5 font-medium text-gray-900">{client.avatarUrl}</td> */}
                         <td className="px-6 py-4 whitespace-no-wrap text-sm leading-5 font-medium text-gray-900">
                             <button
                                 type="button"
                                 value={client.id}
-                                onClick={(e) => OpenEditFormModal(e)}
                                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                             >
                                 Edit

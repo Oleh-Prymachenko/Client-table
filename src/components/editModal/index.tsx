@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { EditClient } from './EditClient'
+import EditClient from './EditClient'
 
 export default function EditModal({
     setOpenEditModal,
@@ -8,12 +8,10 @@ export default function EditModal({
     setFirstName,
     setLastName,
     setPhone,
-    setAvatarUrl,
     setId,
     firstName,
     lastName,
     phone,
-    avatarUrl,
     id,
 }) {
     return (
@@ -23,13 +21,11 @@ export default function EditModal({
             setFirstName={setFirstName}
             setLastName={setLastName}
             setPhone={setPhone}
-            setAvatarUrl={setAvatarUrl}
-            setId={setId}
             firstName={firstName}
             lastName={lastName}
             phone={phone}
-            avatarUrl={avatarUrl}
             id={id}
+            setId={setId}
         />
     )
 }
