@@ -2,7 +2,7 @@ import React from 'react'
 import { useQueryClient, useMutation } from 'react-query'
 
 import { expaneClient } from '../../api/graphqlClients'
-import { updateClient } from '../../api/mutations'
+import { PUT_CLIENT } from '../../api/mutations'
 import { IForUpdate } from '../../types/interfaces'
 import Form from './Form'
 
@@ -27,15 +27,15 @@ export default ({
         phone,
     }
 
-    const updateClients = async () => {
+    const updateClient = async () => {
         const response = await expaneClient.request(
-            updateClient,
+            PUT_CLIENT,
             variablesForUpdate
         )
         console.log(JSON.stringify(response, undefined, 2))
     }
 
-    const editClient: any = useMutation(updateClients, {
+    const editClient: any = useMutation(updateClient, {
         onSuccess: () => queryClient.invalidateQueries('clients'),
     })
 

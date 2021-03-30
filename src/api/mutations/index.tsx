@@ -1,6 +1,6 @@
 import { gql } from 'graphql-request'
 
-export const createClient = gql`
+export const POST_CLIENT = gql`
     mutation AddClient(
         $firstName: String!
         $lastName: String!
@@ -21,7 +21,7 @@ export const createClient = gql`
         }
     }
 `
-export const updateClient = gql`
+export const PUT_CLIENT = gql`
     mutation updateClient(
         $id: ID!
         $firstName: String!

@@ -3,7 +3,7 @@ import { useQueryClient, useMutation } from 'react-query'
 
 import Form from './Form'
 import { expaneClient } from '../../api/graphqlClients'
-import { createClient } from '../../api/mutations'
+import { POST_CLIENT } from '../../api/mutations'
 import { IForCreate } from '../../types/interfaces'
 
 export default ({
@@ -26,16 +26,16 @@ export default ({
         phone,
     }
 
-    const CreateClient = async () => {
+    const createClient = async () => {
         const response = await expaneClient.request(
-            createClient,
+            POST_CLIENT,
             variablesForCreate
         )
         console.log(JSON.stringify(response, undefined, 2))
         return response
     }
 
-    const addClient: any = useMutation(CreateClient, {
+    const addClient: any = useMutation(createClient, {
         onSuccess: () => queryClient.invalidateQueries('clients'),
     })
 

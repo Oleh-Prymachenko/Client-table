@@ -1,6 +1,6 @@
 import { gql } from 'graphql-request'
 
-export const queryGetClients = gql`
+export const CLIENTS = gql`
     {
         getClients {
             id
