@@ -1,0 +1,8 @@
+{
+  "Clients" : {
+    "id": "int",
+    "firstName": "string",
+    "lastName": "string",
+    "phone": "string"
+  }
+}
