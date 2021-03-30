@@ -6,10 +6,10 @@
       "phone": "string"
   },
      "addClient" :(
-          "firstName": "String"
-          "lastName": "String"
-          "phone": "String"
-          "avatarUrl": "String"
+          "firstName": "string",
+          "lastName": "string",
+          "phone": "string",
+          "avatarUrl": "string"
      ) "Client" : {
       "id": "id",
       "firstName": "string",
