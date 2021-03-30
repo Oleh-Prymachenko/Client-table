@@ -5,16 +5,19 @@
       "lastName": "string",
       "phone": "string"
   },
-     "addClient" :{
+     { 
+       "addClient" :{
           "firstName": "string",
           "lastName": "string",
           "phone": "string",
           "avatarUrl": "string"
-     } "Client" : {
-      "id": "id",
-      "firstName": "string",
-      "lastName": "string",
-      "phone": "string"
+             } "Client" : {
+                "id": "id",
+                "firstName": "string",
+                "lastName": "string",
+                "phone": "string"
+                    }
+  }
 }
  
 
