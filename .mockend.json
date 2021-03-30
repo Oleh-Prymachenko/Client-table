@@ -1,5 +1,5 @@
 {
-  "Clients" : {
+  "Client" : {
     "id": "int",
     "firstName": "string",
     "lastName": "string",
