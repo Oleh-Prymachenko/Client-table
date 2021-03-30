@@ -5,12 +5,12 @@
       "lastName": "string",
       "phone": "string"
   },
-     "addClient" :(
+     "addClient" :{
           "firstName": "string",
           "lastName": "string",
           "phone": "string",
           "avatarUrl": "string"
-     ) "Client" : {
+     } "Client": {
       "id": "id",
       "firstName": "string",
       "lastName": "string",
