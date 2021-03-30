@@ -4,7 +4,17 @@
       "firstName": "string",
       "lastName": "string",
       "phone": "string"
-  }
+  },
+     "addClient" :(
+          "firstName": "String"
+          "lastName": "String"
+          "phone": "String"
+          "avatarUrl": "String"
+     ) "Client" : {
+      "id": "id",
+      "firstName": "string",
+      "lastName": "string",
+      "phone": "string"
 }
  
 
