@@ -1,8 +1,8 @@
 {
-     Client {
-      "id": "id"
-      "firstName": "string"
-      "lastName": "string"
+     "Client" : {
+      "id": "id",
+      "firstName": "string",
+      "lastName": "string",
       "phone": "string"
   }
 }
